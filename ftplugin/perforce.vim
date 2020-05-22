@@ -41,7 +41,7 @@ let s:patterns{'Depot'}    = '\%(^Description:\s*\_s\?\s*\)\zs\S\|^Description:'
 let s:patterns{'Group'}    = '\%(^Users:\s*\_s\?\s*\)\zs\S\|^Users:'
 " Position cursor on the most appropriate line based on the type of spec being
 " edited.
-function! s:PositionLine()
+function! s:PositionLine() abort
   let specPattern = '^# A Perforce \(.*\) Specification.$'
   if getline(1) =~ specPattern
     let spec = substitute(substitute(getline(1), specPattern, '\1', ''), ' ',
