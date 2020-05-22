@@ -29,7 +29,9 @@ setlocal wrapmargin=0
 setlocal textwidth=80
 let b:undo_ftplugin = 'setl ts< sts< sw< et< ai< fo< com< wm< tw<'
 
-if !exists("loaded_perforce_ftplugin")
+if exists("loaded_perforce_ftplugin") || &cp
+  finish
+endif
 let s:patterns{'Change'}   = '\%(^Description:\s*\_s\?\s*\)\zs\S\|^Description:'
 let s:patterns{'Branch'}   = '\%(^View:\s*\_s\?\s*\)\zs\S\|^View:'
 let s:patterns{'Label'}    = '\%(^View:\s*\_s\?\s*\)\zs\S\|^View:'
@@ -54,6 +56,5 @@ function! s:PositionLine() abort
   endif
 endfunction
 let loaded_perforce_ftplugin=1
-endif
 
 call s:PositionLine()
